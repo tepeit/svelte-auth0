@@ -15,7 +15,7 @@
   });
 
   function login() {
-    auth.loginWithPopup(auth0Client);
+    auth.loginWithPopup(auth0Client); //
   }
 
   function logout() {
@@ -27,7 +27,7 @@
       id: genRandom(),
       description: newTask,
       completed: false,
-      user: $user.email
+      user: $user.email,
     };
 
     console.log(newTaskObject);
@@ -49,12 +49,6 @@
   }
 </script>
 
-<style>
-  #main-application {
-    margin-top: 50px;
-  }
-</style>
-
 <main>
   <!-- App Bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -66,14 +60,17 @@
       data-target="#navbarText"
       aria-controls="navbarText"
       aria-expanded="false"
-      aria-label="Toggle navigation">
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon" />
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <div class="navbar-nav mr-auto user-details">
         {#if $isAuthenticated}
-          <span class="text-white">&nbsp;&nbsp;{$user.name}
-            ({$user.email})</span>
+          <span class="text-white"
+            >&nbsp;&nbsp;{$user.name}
+            ({$user.email})</span
+          >
         {:else}<span>&nbsp;</span>{/if}
       </div>
 
@@ -111,7 +108,8 @@
               class="btn btn-primary btn-lg mr-auto ml-auto"
               href="/#"
               role="button"
-              on:click={login}>Log In</a>
+              on:click={login}>Log In</a
+            >
           </div>
         </div>
       </div>
@@ -131,7 +129,8 @@
           <input
             class="form-control"
             bind:value={newTask}
-            placeholder="Enter New Task" />
+            placeholder="Enter New Task"
+          />
           <br />
           <button type="button" class="btn btn-primary" on:click={addItem}>
             Add Task
@@ -141,3 +140,9 @@
     </div>
   {/if}
 </main>
+
+<style>
+  #main-application {
+    margin-top: 50px;
+  }
+</style>
