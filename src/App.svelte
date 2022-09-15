@@ -39,6 +39,14 @@
     newTask = "";
   }
 
+  async function getToken() {
+    const token = await auth0Client.getTokenSilently({scope: "email"});
+    console.log("Token: " + token)
+
+    const claims = await auth0Client.getIdTokenClaims();
+    console.log("Claims: " + claims.__raw);
+  }
+
   function genRandom(length = 7) {
     var chars =
       "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -135,6 +143,7 @@
           <button type="button" class="btn btn-primary" on:click={addItem}>
             Add Task
           </button>
+          <button type="button" class="btn btn-primary" on:click={getToken}>Get Token</button>
         </div>
       </div>
     </div>

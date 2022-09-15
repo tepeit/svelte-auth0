@@ -9,8 +9,11 @@ async function createClient() {
     let auth0Client = await createAuth0Client({
         domain: config.domain,
         client_id: config.clientId,
-        scope: 'people:read',
-        audience: 'fastapi-template'
+        audience: config.audience,
+        // advancedOptions: {
+        //   defaultScope: 'email'
+        // }
+        scope: config.scope,
         // cacheLocation: 'localstorage'
       });
 
@@ -26,7 +29,7 @@ async function loginWithPopup(client, options) {
       user.set(await client.getUser());
       console.log("Got user")
       isAuthenticated.set(true);
-      const accessToken = await client.getTokenSilently();
+      const accessToken = await client.getTokenSilently({scope: "openid profile email"});
       console.log("accessToken: " + accessToken)
     } catch (e) {
       // eslint-disable-next-line
